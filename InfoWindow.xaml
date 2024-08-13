@@ -1,0 +1,97 @@
+﻿<ui:FluentWindow
+    x:Class="Wallop.InfoWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Wallop"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    Title="Hakkında"
+    Width="450"
+    Height="450"
+    ExtendsContentIntoTitleBar="True"
+    FontFamily="Segoe UI"
+    SnapsToDevicePixels="True"
+    WindowBackdropType="Acrylic"
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="90" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <ui:TitleBar
+            Title="Hakkında"
+            Grid.Row="0"
+            CanMaximize="False"
+            ShowMaximize="False" />
+        <ui:SymbolIcon
+            Grid.Row="1"
+            FontSize="52"
+            Symbol="Info16" />
+        <Grid Grid.Row="2" Margin="20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <ui:TextBlock
+                Grid.Row="0"
+                FontSize="20"
+                FontWeight="Bold"
+                Text="Geliştirici" />
+            <ui:TextBlock
+                Grid.Row="1"
+                FontSize="16"
+                FontWeight="Medium"
+                Opacity="0.8"
+                Text="ShadesOfDeath" />
+            <ui:TextBlock
+                Grid.Row="2"
+                Margin="0,10,0,0"
+                FontSize="20"
+                FontWeight="Bold"
+                Text="API" />
+            <ui:TextBlock
+                Grid.Row="3"
+                FontSize="16"
+                FontWeight="Medium"
+                Opacity="0.8"
+                Text="Bing RESTful" />
+            <ui:TextBlock
+                Grid.Row="4"
+                Margin="0,10,0,0"
+                FontSize="20"
+                FontWeight="Bold"
+                Text="Sürüm" />
+            <ui:TextBlock
+                Grid.Row="5"
+                FontSize="16"
+                FontWeight="Medium"
+                Opacity="0.8"
+                Text="1.0" />
+            <ui:TextBlock
+                Grid.Row="6"
+                Margin="0,10,0,0"
+                FontSize="20"
+                FontWeight="Bold"
+                Text="Kaynak Kodu" />
+            <ui:HyperlinkButton
+                Grid.Row="7"
+                Content="Github"
+                FontSize="16"
+                FontWeight="Medium"
+                NavigateUri="https://github.com/shadesofdeath/Wallop"
+                Opacity="0.8" />
+        </Grid>
+
+    </Grid>
+</ui:FluentWindow>
