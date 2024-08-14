@@ -7,8 +7,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
     Title="Ayarlar"
-    Width="400"
-    Height="500"
+    Width="420"
+    Height="550"
     ExtendsContentIntoTitleBar="True"
     FontFamily="Segoe UI"
     ResizeMode="NoResize"
@@ -44,7 +44,6 @@
                 <ComboBoxItem Content="1366x768" />
                 <ComboBoxItem Content="1280x768" />
                 <ComboBoxItem Content="1024x768" />
-
             </ComboBox>
             <ui:TextBlock
                 Margin="0,10,0,10"
@@ -57,7 +56,6 @@
                 Maximum="200"
                 Minimum="1"
                 Value="{Binding MaxLoadedImages, Mode=OneTime}" />
-
 
             <ui:TextBlock
                 Margin="0,20,0,10"
@@ -75,7 +73,6 @@
                     </Button.Content>
                 </Button>
             </StackPanel>
-
         </StackPanel>
         <ui:Button
             Grid.Row="2"

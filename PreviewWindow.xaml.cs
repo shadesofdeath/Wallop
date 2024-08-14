@@ -4,7 +4,6 @@ using System.Net.Http;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Media.Imaging;
-using Wallop;
 using Wpf.Ui.Controls;
 
 namespace Wallop

@@ -7,8 +7,6 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using Newtonsoft.Json.Linq;
 using Wpf.Ui.Controls;
-using System.Linq;
-using System.Collections.Generic;
 using MessageBox = System.Windows.MessageBox;
 
 namespace Wallop
@@ -32,18 +30,14 @@ namespace Wallop
                 _wallpapers = value;
             }
         }
-
         public MainWindow()
         {
             InitializeComponent();
             DataContext = this;
             InitializeCategoryComboBox();
             LoadUserSettings();
-
-            // Başlangıç araması ekleyin
             _ = SearchWallpapers();
         }
-
         private void LoadUserSettings()
         {
             userSettings = UserSettings.Load();

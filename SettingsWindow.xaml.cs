@@ -1,5 +1,9 @@
-﻿using System.Windows;
+﻿using System;
+using System.ServiceProcess;
+using System.Windows;
 using Wpf.Ui.Controls;
+using MessageBox = System.Windows.MessageBox;
+using MessageBoxButton = System.Windows.MessageBoxButton;
 
 namespace Wallop
 {
@@ -18,11 +22,8 @@ namespace Wallop
         {
             ResolutionComboBox.SelectedIndex = GetResolutionIndex(userSettings.PreferredResolution);
             DownloadFolderTextBox.Text = userSettings.DownloadFolder;
-
-            // MaxImagesNumberBox'un varsayılan değeri için kontrol
             MaxImagesNumberBox.Value = userSettings.MaxLoadedImages > 0 ? userSettings.MaxLoadedImages : 50;
         }
-
 
         private int GetResolutionIndex(string resolution)
         {
@@ -52,6 +53,17 @@ namespace Wallop
             }
         }
 
+        private int GetFrequencyIndex(string frequency)
+        {
+            switch (frequency)
+            {
+                case "Günlük": return 0;
+                case "Haftalık": return 1;
+                case "Aylık": return 2;
+                default: return 0;
+            }
+        }
+
         private void BrowseButton_Click(object sender, RoutedEventArgs e)
         {
             var dialog = new System.Windows.Forms.FolderBrowserDialog();
@@ -66,19 +78,43 @@ namespace Wallop
         {
             userSettings.PreferredResolution = GetResolutionValue(ResolutionComboBox.SelectedIndex);
             userSettings.DownloadFolder = DownloadFolderTextBox.Text;
-
-            if (MaxImagesNumberBox.Value.HasValue)
-            {
-                userSettings.MaxLoadedImages = (int)MaxImagesNumberBox.Value.Value;
-            }
-            else
-            {
-                userSettings.MaxLoadedImages = 50; // Varsayılan değer
-            }
-
+            userSettings.MaxLoadedImages = (int)MaxImagesNumberBox.Value;
             userSettings.Save();
+
+            ControlWallpaperChangerService();
+
             DialogResult = true;
             Close();
+        }
+
+        private void ControlWallpaperChangerService()
+        {
+            try
+            {
+                using (ServiceController service = new ServiceController("WallpaperChangerService"))
+                {
+                    if (userSettings.AutoChangeEnabled)
+                    {
+                        if (service.Status != ServiceControllerStatus.Running)
+                        {
+                            service.Start();
+                            service.WaitForStatus(ServiceControllerStatus.Running, TimeSpan.FromSeconds(10));
+                        }
+                    }
+                    else
+                    {
+                        if (service.Status == ServiceControllerStatus.Running)
+                        {
+                            service.Stop();
+                            service.WaitForStatus(ServiceControllerStatus.Stopped, TimeSpan.FromSeconds(10));
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Hizmet kontrolü sırasında bir hata oluştu: {ex.Message}", "Hata", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }

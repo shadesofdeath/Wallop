@@ -25,8 +25,25 @@
         <ui:Image
             x:Name="PreviewImage"
             Grid.Row="1"
-            Margin="8"
-            Stretch="Uniform" />
+            Margin="4"
+            CornerRadius="8"
+            Stretch="Uniform">
+            <ui:Image.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Click="SetWallpaper_Click" Header="Masaüstü arka planı ayarla">
+                        <MenuItem.Icon>
+                            <ui:SymbolIcon Symbol="Wallpaper20" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <Separator />
+                    <MenuItem Click="Download_Click" Header="İndir">
+                        <MenuItem.Icon>
+                            <ui:SymbolIcon Symbol="ArrowDownload16" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </ContextMenu>
+            </ui:Image.ContextMenu>
+        </ui:Image>
         <StackPanel
             Grid.Row="2"
             Margin="0,0,0,20"

@@ -13,6 +13,9 @@ namespace Wallop
         public bool AutoDownload { get; set; } = false;
         public int MaxLoadedImages { get; set; } = 50;
         public string DownloadFolder { get; set; } = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
+        public bool AutoChangeEnabled { get; set; } = false;
+        public string ChangeFrequency { get; set; } = "Günlük";
+        public int ChangeIntervalSeconds { get; set; } = 86400;
 
         private static string SettingsPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Wallop", "settings.json");
 
@@ -32,26 +35,23 @@ namespace Wallop
             {
                 var settings = JsonConvert.DeserializeObject<UserSettings>(File.ReadAllText(SettingsPath));
 
-                // MaxLoadedImages için geçerlilik kontrolü
                 if (settings.MaxLoadedImages <= 0)
                 {
-                    settings.MaxLoadedImages = 50; // Geçersiz değer varsa varsayılana çevir
+                    settings.MaxLoadedImages = 50;
                 }
 
                 return settings;
             }
 
-            // JSON dosyası yoksa veya geçersizse, varsayılan ayarlarla yeni bir nesne döndür
             return new UserSettings();
         }
-
 
         public void AddToDownloadHistory(string imageId)
         {
             if (!DownloadHistory.Contains(imageId))
             {
                 DownloadHistory.Add(imageId);
-                if (DownloadHistory.Count > 100) // Maksimum 100 öğe sakla
+                if (DownloadHistory.Count > 100)
                 {
                     DownloadHistory.RemoveAt(0);
                 }

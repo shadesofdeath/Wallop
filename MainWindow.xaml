@@ -101,6 +101,7 @@
                                 <ui:Image
                                     Width="200"
                                     Height="150"
+                                    CornerRadius="8"
                                     MouseLeftButtonDown="Image_MouseLeftButtonDown"
                                     Source="{Binding ThumbnailUrl}" />
                             </Grid>
